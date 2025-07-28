@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandra Sterling - Senior Business Consultant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B6914;
+            --secondary: #B8860B;
+            --accent: #DAA520;
+            --light-gold: #F5E6A8;
+            --cream: #FFF8DC;
+            --beige: #F5F5DC;
+            --warm-beige: #F7F3E9;
+            --bronze: #CD7F32;
+            --text-dark: #2F2F2F;
+            --text-medium: #5A5A5A;
+            --text-light: #8A8A8A;
+            --border: #E8E0D0;
+            --shadow: rgba(139, 105, 20, 0.15);
+            --gradient-gold: linear-gradient(135deg, #DAA520, #B8860B);
+            --gradient-cream: linear-gradient(135deg, #FFF8DC, #F5F5DC);
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--warm-beige) 0%, var(--cream) 50%, var(--beige) 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: var(--cream);
+            padding: 50px 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px var(--shadow);
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            color: var(--primary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .title {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 30px;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            font-size: 1rem;
+            color: var(--text-medium);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: var(--gradient-cream);
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(139, 105, 20, 0.08);
+        }
+
+        .contact-item:hover {
+            background: var(--gradient-gold);
+            color: var(--cream);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .tabs-container {
+            background: var(--cream);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px var(--shadow);
+            border: 2px solid var(--border);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tabs-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-gold);
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--primary);
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            position: relative;
+        }
+
+        .tabs::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            padding: 20px 28px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--light-gold);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            transition: all 0.4s ease;
+            white-space: nowrap;
+            position: relative;
+            font-family: inherit;
+            text-transform: uppercase;
+        }
+
+        .tab:hover {
+            background: rgba(218, 165, 32, 0.2);
+            color: var(--cream);
+        }
+
+        .tab.active {
+            background: var(--cream);
+            color: var(--primary);
+            font-weight: 700;
+            box-shadow: inset 0 -3px 0 var(--accent);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 45px;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            margin-bottom: 30px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+        }
+
+        .about {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-medium);
+            text-align: justify;
+            background: var(--gradient-cream);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 5px solid var(--accent);
+            box-shadow: 0 8px 25px rgba(139, 105, 20, 0.08);
+            position: relative;
+        }
+
+        .about::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.3;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 35px;
+            padding: 30px;
+            background: var(--gradient-cream);
+            border-radius: 20px;
+            border-left: 5px solid var(--bronze);
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(139, 105, 20, 0.08);
+            position: relative;
+        }
+
+        .experience-item::before, .education-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .experience-item:hover, .education-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px var(--shadow);
+            border-left-color: var(--accent);
+        }
+
+        .experience-item:hover::before, .education-item:hover::before {
+            opacity: 1;
+        }
+
+        .job-header, .edu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .job-title, .degree {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+        }
+
+        .company, .institution {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-top: 4px;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .date {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-style: italic;
+            background: var(--light-gold);
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(139, 105, 20, 0.15);
+        }
+
+        .job-description {
+            margin-top: 18px;
+        }
+
+        .job-description ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .job-description li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        .job-description li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            padding: 18px 24px;
+            background: var(--gradient-cream);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            font-size: 1rem;
+            color: var(--text-dark);
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .skill-item:hover {
+            background: var(--gradient-gold);
+            color: var(--cream);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .skill-item:hover::before {
+            left: 100%;
+        }
+
+        .achievements-list {
+            list-style: none;
+        }
+
+        .achievements-list li {
+            margin-bottom: 18px;
+            padding: 20px 25px;
+            background: var(--gradient-cream);
+            border-radius: 15px;
+            padding-left: 60px;
+            position: relative;
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+        }
+
+        .achievements-list li::before {
+            content: '🏆';
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            font-size: 1.4rem;
+        }
+
+        .achievements-list li:hover {
+            background: var(--gradient-gold);
+            color: var(--cream);
+            transform: translateX(15px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .certifications-list {
+            list-style: none;
+        }
+
+        .certifications-list li {
+            margin-bottom: 15px;
+            padding: 18px 25px;
+            background: var(--gradient-cream);
+            border-left: 5px solid var(--bronze);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(139, 105, 20, 0.08);
+        }
+
+        .certifications-list li:hover {
+            border-left-color: var(--accent);
+            background: var(--gradient-gold);
+            color: var(--cream);
+            transform: translateX(15px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .interests {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .interest-item {
+            padding: 15px 25px;
+            background: var(--gradient-gold);
+            color: var(--cream);
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(139, 105, 20, 0.25);
+            letter-spacing: 0.5px;
+        }
+
+        .interest-item:hover {
+            background: linear-gradient(135deg, var(--primary), var(--bronze));
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 12px 35px rgba(139, 105, 20, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .name {
+                font-size: 2.4rem;
+                letter-spacing: 2px;
+            }
+
+            .header {
+                padding: 30px 25px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .tab-content {
+                padding: 30px;
+            }
+
+            .job-header, .edu-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .date {
+                margin-top: 8px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex: 1;
+                min-width: 140px;
+                padding: 16px 20px;
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--light-gold);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Additional luxury touches */
+        .section-divider {
+            height: 1px;
+            background: var(--gradient-gold);
+            margin: 30px 0;
+            opacity: 0.5;
+        }
+
+        .highlight {
+            background: var(--light-gold);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="name">ALEXANDRA STERLING</h1>
+            <p class="title">Senior Business Consultant & Strategic Advisor</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>alexandra.sterling@consulting.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>+1 (555) 123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>New York, NY</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('about')">About</button>
+                <button class="tab" onclick="showTab('experience')">Experience</button>
+                <button class="tab" onclick="showTab('education')">Education</button>
+                <button class="tab" onclick="showTab('skills')">Skills</button>
+                <button class="tab" onclick="showTab('achievements')">Achievements</button>
+                <button class="tab" onclick="showTab('certifications')">Certifications</button>
+                <button class="tab" onclick="showTab('interests')">Interests</button>
+            </div>
+
+            <div id="about" class="tab-content active">
+                <h2 class="section-title">About Me</h2>
+                <p class="about">
+                    A seasoned business consultant with over 15 years of experience in strategic planning, organizational development, and digital transformation. Proven track record of helping Fortune 500 companies optimize their operations, increase revenue by up to 40%, and successfully navigate complex market challenges. Specialized in <span class="highlight">merger & acquisition advisory</span>, <span class="highlight">process optimization</span>, and <span class="highlight">change management</span>. Passionate about driving sustainable growth and building high-performance teams that deliver exceptional results in competitive business environments.
+                </p>
+            </div>
+
+            <div id="experience" class="tab-content">
+                <h2 class="section-title">Professional Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Senior Partner & Practice Lead</div>
+                            <div class="company">McKinsey & Company</div>
+                        </div>
+                        <div class="date">January 2020 - Present</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Lead strategic consulting engagements for Fortune 100 clients across technology, healthcare, and financial services sectors</li>
+                            <li>Managed cross-functional teams of 15+ consultants and analysts to deliver complex transformation projects</li>
+                            <li>Developed innovative frameworks for digital transformation that increased client operational efficiency by 35%</li>
+                            <li>Spearheaded merger integration projects worth over $2B, ensuring seamless organizational transitions</li>
+                            <li>Built and maintained strategic relationships with C-suite executives and board members</li>
+                            <li>Mentored junior consultants and led professional development initiatives across the practice</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Principal Consultant</div>
+                            <div class="company">Bain & Company</div>
+                        </div>
+                        <div class="date">March 2016 - December 2019</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Designed and implemented strategic initiatives that generated $500M+ in additional revenue for clients</li>
+                            <li>Led due diligence processes for private equity acquisitions valued at $1B+</li>
+                            <li>Developed comprehensive market entry strategies for emerging technologies and new geographical markets</li>
+                            <li>Established data-driven performance management systems that improved client decision-making processes</li>
+                            <li>Conducted organizational assessments and redesigned operational structures for optimal efficiency</li>
+                            <li>Presented strategic recommendations to executive committees and board of directors</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Management Consultant</div>
+                            <div class="company">Deloitte Consulting</div>
+                        </div>
+                        <div class="date">June 2012 - February 2016</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Executed end-to-end consulting projects focusing on operational excellence and cost optimization</li>
+                            <li>Collaborated with client teams to identify process inefficiencies and implement sustainable improvements</li>
+                            <li>Developed business cases and ROI analyses for strategic investments and technology implementations</li>
+                            <li>Facilitated executive workshops and stakeholder alignment sessions for major organizational changes</li>
+                            <li>Created comprehensive project documentation and knowledge transfer protocols</li>
+                            <li>Supported business development activities and proposal writing for new client engagements</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Senior Business Analyst</div>
+                            <div class="company">Goldman Sachs</div>
+                        </div>
+                        <div class="date">August 2009 - May 2012</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Conducted financial modeling and valuation analyses for M&A transactions and IPOs</li>
+                            <li>Prepared detailed investment research reports and market analysis for institutional clients</li>
+                            <li>Built sophisticated Excel models for complex financial instruments and derivative products</li>
+                            <li>Collaborated with investment banking teams on client presentations and pitch materials</li>
+                            <li>Performed risk assessments and compliance reviews for trading and investment strategies</li>
+                            <li>Supported senior executives in strategic planning and capital allocation decisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="education" class="tab-content">
+                <h2 class="section-title">Educational Background</h2>
+                
+                <div class="education-item">
+                    <div class="edu-header">
+                        <div>
+                            <div class="degree">Master of Business Administration (MBA)</div>
+                            <div class="institution">Harvard Business School</div>
+                        </div>
+                        <div class="date">September 2007 - June 2009</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Concentration in Strategy and General Management</li>
+                            <li>Baker Scholar (Top 5% of class)</li>
+                            <li>President of the Consulting Club</li>
+                            <li>Case Competition Winner - McKinsey Global Challenge</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="edu-header">
+                        <div>
+                            <div class="degree">Bachelor of Science in Economics</div>
+                            <div class="institution">Wharton School, University of Pennsylvania</div>
+                        </div>
+                        <div class="date">September 2003 - May 2007</div>
+                    </div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Magna Cum Laude, Phi Beta Kappa</li>
+                            <li>Concentration in Finance and Statistics</li>
+                            <li>Dean's List for 6 consecutive semesters</li>
+                            <li>Captain of the Varsity Tennis Team</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="skills" class="tab-content">
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Strategic Planning</div>
+                    <div class="skill-item">Digital Transformation</div>
+                    <div class="skill-item">Change Management</div>
+                    <div class="skill-item">M&A Advisory</div>
+                    <div class="skill-item">Financial Modeling</div>
+                    <div class="skill-item">Data Analytics</div>
+                    <div class="skill-item">Process Optimization</div>
+                    <div class="skill-item">Executive Leadership</div>
+                    <div class="skill-item">Project Management</div>
+                    <div class="skill-item">Risk Assessment</div>
+                    <div class="skill-item">Market Research</div>
+                    <div class="skill-item">Stakeholder Management</div>
+                </div>
+            </div>
+
+            <div id="achievements" class="tab-content">
+                <h2 class="section-title">Key Achievements</h2>
+                <ul class="achievements-list">
+                    <li>Generated over $3B in additional value for clients through strategic initiatives and operational improvements</li>
+                    <li>Successfully led 50+ consulting engagements with 100% client satisfaction rate</li>
+                    <li>Recognized as "Consultant of the Year" by McKinsey Global Institute (2022)</li>
+                    <li>Published thought leadership articles in Harvard Business Review and McKinsey Quarterly</li>
+                    <li>Speaker at World Economic Forum and Fortune Global Forum conferences</li>
+                    <li>Mentored 25+ junior consultants, with 90% promotion rate within 2 years</li>
+                </ul>
+            </div>
+
+            <div id="certifications" class="tab-content">
+                <h2 class="section-title">Professional Certifications</h2>
+                <ul class="certifications-list">
+                    <li>Certified Management Consultant (CMC) - Institute of Management Consultants</li>
+                    <li>Project Management Professional (PMP) - Project Management Institute</li>
+                    <li>Chartered Financial Analyst (CFA) - CFA Institute</li>
+                    <li>Six Sigma Black Belt - American Society for Quality</li>
+                    <li>Certified Change Management Professional (CCMP) - ACMP</li>
+                    <li>Advanced Certificate in Digital Strategy - MIT Sloan Executive Education</li>
+                </ul>
+            </div>
+
+            <div id="interests" class="tab-content">
+                <h2 class="section-title">Personal Interests</h2>
+                <div class="interests">
+                    <div class="interest-item">🎾 Tennis</div>
+                    <div class="interest-item">📚 Strategic Reading</div>
+                    <div class="interest-item">🌍 International Travel</div>
+                    <div class="interest-item">🎨 Art Collection</div>
+                    <div class="interest-item">🍷 Wine Tasting</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Smooth scroll to top of content
+            document.querySelector('.tabs-container').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Add smooth transitions and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to experience items
+            const experienceItems = document.querySelectorAll('.experience-item, .education-item');
+            experienceItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add luxury ripple effect to tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        background-color: rgba(218, 165, 32, 0.6);
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                    `;
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Add CSS for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
